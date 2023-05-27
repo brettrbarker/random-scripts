@@ -17,9 +17,6 @@ player.play(stream_url)
 # Set the initial playback time
 lastPlaybackTime = 0
 
-# Set the maximum time for the stream to be frozen (in seconds)
-max_frozen_time = 10
-
 # Allow stream 10 seconds to start before checking
 time.sleep(10)
 
