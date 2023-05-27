@@ -30,6 +30,9 @@ player.play(stream_url)
 # Set the initial playback time
 lastPlaybackTime = 0
 
+# Set time to wait while frozen before restarting
+maxFrozenTime = 10
+
 # Allow stream 10 seconds to start before checking
 time.sleep(10)
 
@@ -46,10 +49,24 @@ while True:
     if lastPlaybackTime == player.playback_time:
         if debug:
             print("Stream is frozen. Restarting...")
-        # restart stream
-        player.play(stream_url)
-        # Sleep for 10 seconds to allow stream to start
-        time.sleep(10)
+        for i in range(0, maxFrozenTime):
+            # Wait for a short time
+            time.sleep(1)
+            # Check if the stream is still frozen
+            if lastPlaybackTime == player.playback_time:
+                if debug:
+                    print("Stream is still frozen. Restarting in " + str(maxFrozenTime - i) + " seconds...")
+                if i == maxFrozenTime - 1:
+                    if debug:
+                        print("Stream is still frozen. Restarting now...")
+                    # restart stream
+                    player.play(stream_url)
+                    # Sleep for 10 seconds to allow stream to start
+                    time.sleep(10)
+            else:
+                if debug:
+                    print("Stream is no longer frozen. Continuing...")
+                break
 
     # Update the last playback time
     if debug:
