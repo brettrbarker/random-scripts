@@ -1,3 +1,8 @@
+## ATTENTION
+## NOT MAINTAINED HERE ANYMORE, 
+## SEE https://github.com/brettrbarker/streamer-box
+##
+
 import mpv
 import time
 
